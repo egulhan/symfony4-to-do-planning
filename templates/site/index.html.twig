@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To-do Planning{% endblock %}
+
+{% block body %}
+    <h1>✅ To-do Planning</h1>
+
+    <table class="table">
+        {% for week in plan['weeks'] %}
+            <tr>
+                <td colspan="3" class="week-title text-center">{{ loop.index }}. HAFTA</td>
+            </tr>
+            {% for day in week['days'] %}
+                <tr>
+                    <td colspan="3" class="day-title">{{ loop.index }}. GÜN</td>
+                </tr>
+
+                {% for developer in day['developers'] %}
+                    <tr>
+                        <td colspan="3" class="dev-title">{{ developer['devName'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Task</td>
+                        <td>Zaman</td>
+                        <td>Zorluk</td>
+                    </tr>
+                    {% for task in developer['tasks'] %}
+                        <tr>
+                            <td>{{ task['name'] }}</td>
+                            <td>{{ task['time'] }}</td>
+                            <td>{{ task['difficulty'] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+
+        .week-title, .day-title, .dev-title {
+            font-weight: bold;
+        }
+
+        .dev-title {
+            font-size: 1.1em;
+        }
+
+        .day-title {
+            font-size: 1.3em;
+        }
+
+        .week-title {
+            font-size: 1.5em;
+        }
+    </style>
+{% endblock %}
